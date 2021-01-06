@@ -173,8 +173,6 @@ declare -a vFlags=(
 "Flag 60: Minor or Environment Alarm") 
 
 
-vFlag1=$( echo $vOIDOut |  awk '{print substr($0,0,1)}' )
-
 vFlagsStr=""
 vIndex=0
 for vFlag in "${vFlags[@]}"; do
@@ -186,14 +184,22 @@ for vFlag in "${vFlags[@]}"; do
   let vIndex=${vIndex}+1
 done
 
+vCritical=0
+vOIDArray=($(echo $vOIDOut|sed  's/\(.\)/\1 /g'))
+for i in "${vOIDArray[0]}" "${vOIDArray[1]}" "${vOIDArray[2]}" "${vOIDArray[4]}" "${vOIDArray[8]}" "${vOIDArray[10]}" "${vOIDArray[11]}" "${vOIDArray[12]}" "${vOIDArray[13]}" "${vOIDArray[14]}" "${vOIDArray[15]}" "${vOIDArray[17]}" "${vOIDArray[20]}" "${vOIDArray[23]}" "${vOIDArray[24]}" "${vOIDArray[25]}" "${vOIDArray[26]}" "${vOIDArray[27]}" "${vOIDArray[29]}" "${vOIDArray[32]}" "${vOIDArray[36]}" "${vOIDArray[37]}" "${vOIDArray[38]}" "${vOIDArray[39]}" "${vOIDArray[40]}" "${vOIDArray[41]}" "${vOIDArray[42]}" "${vOIDArray[43]}" "${vOIDArray[44]}" "${vOIDArray[45]}" "${vOIDArray[46]}" "${vOIDArray[47]}" "${vOIDArray[48]}" "${vOIDArray[49]}" "${vOIDArray[52]}" "${vOIDArray[53]}" "${vOIDArray[54]}" "${vOIDArray[55]}" "${vOIDArray[59]}"; do 
+  let vCritical+=$i
+done
+
 #
 # Icinga Check Plugin output
 #
-if [ "$vFlag1" -eq "1" ]; then
-    echo -e "APC UPS State CRITICAL \nCurrent active flags:$vFlagsStr"
-    exit $codeCRITICAL
-elif [ "$vFlag1" -eq "0" ]; then
-    echo -e "APC UPS State OK \nCurrent active flags:$vFlagsStr"
-    exit $codeOK
+if [ "$vCritical" -eq "0" ]; then
+  echo -e "APC UPS State OK \nCurrent active flags:$vFlagsStr"
+  exit $codeOK
+elif [ "$vCritical" -ne "0" ]; then
+  echo -e "APC UPS State CRITICAL \nCurrent active flags:$vFlagsStr"
+  exit $codeCRITICAL
+else
+  echo -e "APC UPS State UNKNOWN \nCurrent active flags:$vFlagsStr"
+  exit $codeUNKNOWN
 fi
-exit $codeUNKNOWN
