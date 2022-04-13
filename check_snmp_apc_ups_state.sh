@@ -189,10 +189,10 @@ done
 #
 # Icinga Check Plugin output
 #
-if [ "$vFlag1" -eq "1" ]; then
+if [[ "$vFlag1" -eq "1" ]]; then
     echo -e "APC UPS State CRITICAL \nCurrent active flags:$vFlagsStr"
     exit $codeCRITICAL
-elif [ "$vFlag1" -eq "0" ]; then
+elif [[ "$vFlag1" -eq "0" ]]; then
     echo -e "APC UPS State OK \nCurrent active flags:$vFlagsStr"
     exit $codeOK
 fi
