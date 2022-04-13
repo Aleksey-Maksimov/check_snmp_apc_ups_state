@@ -5,7 +5,7 @@
 # Tested on Debian GNU/Linux 9.11 (Stretch) with Icinga r2.10.5-1 
 # Put here: /usr/lib/nagios/plugins/check_snmp_apc_ups_state.sh
 # Usage example:
-# ./ceck_snmp_apc_ups_state.sh -H ups-nmc-01.holding.com -P 2c -C public
+# ./check_snmp_apc_ups_state.sh -H ups-nmc-01.holding.com -P 2c -C public
 #
 PLUGIN_NAME="Icinga Plugin Check Command to calculate APC UPS current state (from SNMP data)"
 PLUGIN_VERSION="2019.09.16"
