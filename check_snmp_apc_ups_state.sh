@@ -2,13 +2,20 @@
 #
 # Icinga Plugin Script (Check Command). It calculate APC UPS current state from SNMP data in upsBasicStateOutputState
 # Aleksey Maksimov <aleksey.maksimov@it-kb.ru>
-# Tested on Debian GNU/Linux 9.11 (Stretch) with Icinga r2.10.5-1 
+# Tested on:
+# - Debian GNU/Linux 10.11 (Buster) with Icinga r2.12.3-1, snmpget 5.7.3
+# - Debian GNU/Linux 12.5 (Bookworm) with Icinga r2.14.2-1, snmpget 5.9.3
+#
+# ChangeLog:
+# 2019.09.16 - Initial version
+# 2024.05.13 - Compatibility tested on Debian GNU/Linux 12 (Bookworm)
+#
 # Put here: /usr/lib/nagios/plugins/check_snmp_apc_ups_state.sh
 # Usage example:
 # ./check_snmp_apc_ups_state.sh -H ups-nmc-01.holding.com -P 2c -C public
 #
 PLUGIN_NAME="Icinga Plugin Check Command to calculate APC UPS current state (from SNMP data)"
-PLUGIN_VERSION="2019.09.16"
+PLUGIN_VERSION="2024.05.13"
 PRINTINFO=`printf "\n%s, version %s\n \n" "$PLUGIN_NAME" "$PLUGIN_VERSION"`
 #
 # Exit codes
